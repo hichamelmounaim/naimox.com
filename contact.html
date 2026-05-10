@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Naimox</title>
+  <meta name="description" content="Reach out to the Naimox development team for bug reports, tutorial requests, or business inquiries.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header"><div class="container nav">
+    <a href="index.html" class="logo"><span class="logo-icon">&gt;_</span> Naimox</a>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">/home</a></li><li><a href="blog.html">/tutorials</a></li><li><a href="index.html#tools">/tools</a></li><li><a href="about.html">/about</a></li><li><a href="contact.html" class="active">/contact</a></li>
+    </ul>
+  </div></header>
+
+  <section class="page-hero"><div class="container hero-content">
+    <h1 style="font-family:'Fira Code', monospace;">/contact</h1>
+    <p>Open a connection to our servers.</p>
+  </div></section>
+
+  <section class="content-page"><div class="container">
+    <div class="content-body" style="max-width: 600px;">
+      <div class="form-group">
+        <label>String user_name</label>
+        <input type="text" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label>String user_email</label>
+        <input type="email" placeholder="you@domain.com">
+      </div>
+      <div class="form-group">
+        <label>String message_body</label>
+        <textarea placeholder="Write your message here..."></textarea>
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="alert('POST request successful. Message queued for delivery.')">Submit POST Request</button>
+      
+      <div style="margin-top: 50px; text-align:center; font-family:'Fira Code', monospace; color:var(--text-secondary);">
+        <p>sys.admin@naimox.com</p>
+      </div>
+    </div>
+  </div></section>
+
+  <footer class="footer"><div class="container">
+    <div class="footer-grid">
+      <div><div class="logo"><span class="logo-icon">&gt;_</span> Naimox</div><p>Building better software through clear documentation and tools.</p></div>
+      <div><h4>System</h4><ul><li><a href="blog.html">/tutorials</a></li><li><a href="index.html#tools">/tools</a></li><li><a href="about.html">/about</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Naimox.com. Initialized perfectly.</div>
+  </div></footer>
+  <script src="js/app.js"></script>
+
+  <style>
+    #cookie-consent {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #111; color: #fff; padding: 15px;
+      text-align: center; z-index: 9999;
+      font-size: 0.9rem; display: flex;
+      justify-content: center; align-items: center; gap: 15px;
+    }
+    #cookie-consent button {
+      background: #fff; color: #111; border: none;
+      padding: 8px 15px; cursor: pointer; border-radius: 4px;
+      font-weight: bold;
+    }
+    #cookie-consent button:hover { background: #ddd; }
+  </style>
+  <div id="cookie-consent">
+    <span>We use cookies to improve your experience and serve personalized ads. By continuing, you agree to our privacy policy.</span>
+    <button onclick="document.getElementById('cookie-consent').style.display='none'">Accept</button>
+  </div>
+</body>
+</html>

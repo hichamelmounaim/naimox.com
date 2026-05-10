@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Understanding CORS: Why Your API Requests Are Blocked | Naimox</title>
+  <meta name="description" content="Demystify CORS (Cross-Origin Resource Sharing). Understand the Same-Origin Policy, preflight requests, and how to properly configure your backend headers to stop blocking your frontend.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Understanding CORS: Why Your API Requests Are Blocked | Naimox",
+  "description": "width=device-width, initial-scale=1.0",
+  "datePublished": "2026-05-04",
+  "author": {
+    "@type": "Organization",
+    "name": "naimox Editorial"
+  }
+}
+</script>
+</head>
+<body>
+  <header class="header"><div class="container nav"><a href="../index.html" class="logo"><span class="terminal-icon">>&_</span> Naimox</a><ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="../blog.html" class="active">Tutorials</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul><button class="hamburger"><span></span><span></span><span></span></button></div></header>
+
+  <section class="page-hero"><div class="container hero-content"><span class="tag">Web Security</span><h1>Understanding CORS: Why Your API Requests Are Blocked</h1><div class="article-meta"><span>📅 May 4, 2026</span><span>⏱ 10 min read</span><span>🔒 Security</span>
+    
+    <div style="margin-top: 20px; padding-bottom: 20px;">
+      <strong>Share this article: </strong>
+      <a href="#" style="margin-left: 10px; color: #1DA1F2; text-decoration: none;">🐦 Twitter</a>
+      <a href="#" style="margin-left: 10px; color: #4267B2; text-decoration: none;">📘 Facebook</a>
+      <a href="#" style="margin-left: 10px; color: #0077b5; text-decoration: none;">💼 LinkedIn</a>
+    </div>
+  
+    <div style="margin-top: 30px; padding: 20px; background-color: var(--bg-secondary, #f9f9f9); border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+      <div style="width: 60px; height: 60px; border-radius: 50%; background-color: var(--accent, #007bff); color: white; display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: bold;">
+        N
+      </div>
+      <div>
+        <h4 style="margin: 0 0 5px 0;">About the Author: Naimox Editorial Team</h4>
+        <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary, #555);">
+          We are a dedicated team of experts and enthusiasts committed to providing accurate, highly researched, and engaging content. Our goal is to empower our readers with reliable information and actionable advice.
+        </p>
+      </div>
+    </div>
+  
+    <div style="margin-top:40px; padding-top:20px; border-top:1px solid #eee;">
+      <h3>Related Articles</h3>
+      <ul style="list-style-type:none; padding:0; display:flex; flex-direction:column; gap:10px;">
+        <li><a href="css-grid-vs-flexbox.html" style="color:var(--accent, #007bff); text-decoration:none;">Read More: CSS GRID VS FLEXBOX</a></li>
+        <li><a href="git-commit-best-practices.html" style="color:var(--accent, #007bff); text-decoration:none;">Read More: GIT COMMIT BEST PRACTICES</a></li>
+      </ul>
+    </div>
+</div></div></section>
+
+  <section class="content-page"><div class="container"><div class="content-body">
+    <p>It is a rite of passage for every frontend web developer. You build a beautiful React or Vue application, you deploy it to production, and you attempt to fetch data from your backend API. Instead of the expected JSON payload, the browser console explodes in red error text: <code>"Access to fetch at 'https://api.example.com/data' from origin 'https://app.example.com' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource."</code></p>
+    <p>Your instinct is likely frustration. Why is the browser actively blocking your own application from talking to your own API? To solve the error properly—rather than just installing a sketchy browser extension or blindly copy-pasting wildcard headers from StackOverflow—you must understand the fundamental security mechanism underlying the modern web: the Same-Origin Policy, and its flexible cousin, Cross-Origin Resource Sharing (CORS).</p>
+
+    <h2>The Same-Origin Policy: The Web's Bouncer</h2>
+    <p>Before CORS existed, the web operated under a strict security rule known as the Same-Origin Policy (SOP). The SOP dictates that a web browser permits scripts contained in a first web page to access data in a second web page, but only if both web pages have the same <i>origin</i>. An origin is defined by the combination of three things: the protocol (http/https), the domain (example.com), and the port (:80, :443, :3000).</p>
+    <p>If any of those three elements differ, the origins are considered different. For example, a script running on <code>https://app.example.com</code> cannot natively read data from <code>https://api.example.com</code> because the subdomains differ. It certainly cannot read data from <code>https://evil-hacker.com</code>.</p>
+    <p>Why is this policy necessary? Imagine you log into your banking website. The bank sets a secure session cookie in your browser. Then, in another tab, you accidentally navigate to a malicious website. Without the Same-Origin Policy, a script on that malicious website could seamlessly send an invisible AJAX request to your bank's API, leveraging your valid session cookie to transfer funds to the attacker. The SOP prevents this by ensuring that only scripts from the bank's own domain can interact with the bank's API.</p>
+
+    <h2>The Need for CORS</h2>
+    <p>The Same-Origin Policy is excellent for security, but it is terrible for modern web architecture. Today, it is extremely common for the frontend (a single-page application hosted on Vercel or Netlify) to live on a completely different domain than the backend (a Node.js or Python API hosted on AWS or Heroku). We need a secure way to punch a hole through the Same-Origin Policy to allow legitimate cross-origin communication.</p>
+    <p>That mechanism is CORS. CORS is a mechanism that uses additional HTTP headers to tell browsers to give a web application running at one origin access to selected resources from a different origin.</p>
+
+    <h2>How CORS Actually Works: Preflight Requests</h2>
+    <p>When your frontend application uses <code>fetch()</code> or Axios to make an HTTP request to a different origin, the browser intercepts the request. For certain types of requests (specifically, requests that modify data like POST, PUT, DELETE, or requests sending custom headers like Authorization), the browser first sends an invisible, preliminary request called a <strong>Preflight Request</strong>. The preflight request uses the HTTP <code>OPTIONS</code> method.</p>
+    <p>The browser is essentially asking the target server: "Hey, I have a client at <code>https://app.example.com</code> who wants to send you a POST request with an Authorization header. Are you willing to accept this?"</p>
+    <p>If the server is configured correctly, it responds to the OPTIONS request with specific CORS headers, saying: "Yes, I accept requests from <code>https://app.example.com</code>, and I accept the POST method and the Authorization header." Only after receiving this affirmative response will the browser send the actual, original POST request containing your data.</p>
+    <p>If the server does not respond with the correct headers, or responds with the wrong domain, the browser blocks the actual request and throws the dreaded red CORS error in your console. Note carefully: <strong>CORS is enforced by the browser, not the server.</strong> Tools like Postman or cURL do not care about CORS and will execute the request successfully, which is why testing your API in Postman works while your frontend application fails.</p>
+
+    <h2>Fixing the Error: Server-Side Configuration</h2>
+    <p>The solution to a CORS error is never found in your frontend React or Vue code. The solution must be implemented on the backend server. You need to configure your API to respond with the correct HTTP headers.</p>
+    <p>The most important header is <code>Access-Control-Allow-Origin</code>. This tells the browser which origins are permitted to access the resource. While it is tempting to set this to <code>*</code> (a wildcard indicating that any website on the internet can read your API), this completely defeats the security benefits of the Same-Origin Policy. In production, you should explicitly specify the exact origin of your frontend application.</p>
+    <pre><code>Access-Control-Allow-Origin: https://app.example.com
+Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+Access-Control-Allow-Headers: Content-Type, Authorization</code></pre>
+    <p>If you are using Node.js and Express, implementing this is trivial using the official <code>cors</code> middleware package. Simply install it and configure it with an array of permitted origins, and the middleware will automatically handle intercepting OPTIONS requests and applying the correct headers to all responses.</p>
+    <p>Understanding CORS shifts it from being a frustrating obstacle to a logical security feature. It protects your users while allowing modern, decoupled architectures to function smoothly.</p>
+
+    <p><a href="../blog.html" style="color:var(--accent);text-decoration:none;font-weight:600">← Back to All Tutorials</a></p>
+  </div></div></section>
+
+  <footer class="footer"><div class="container"><div class="footer-grid"><div><div class="logo"><span class="terminal-icon">>&_</span> Naimox</div><p>Developer tools, tutorials, and insights for modern software engineering.</p></div><div><h4>Explore</h4><ul><li><a href="../blog.html">Tutorials</a></li><li><a href="../index.html#tools">Developer Tools</a></li><li><a href="../about.html">About</a></li></ul></div><div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy Policy</a></li><li><a href="../terms.html">Terms of Service</a></li><li><a href="../disclaimer.html">Disclaimer</a></li><li><a href="../sitemap-html.html">HTML Sitemap</a></li><li><a href="../contact.html">Contact</a></li></ul></div></div><div class="footer-bottom">&copy; 2026 Naimox.com. All rights reserved.</div></div></footer>
+  <script src="../js/app.js"></script>
+
+  <style>
+    #cookie-consent {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #111; color: #fff; padding: 15px;
+      text-align: center; z-index: 9999;
+      font-size: 0.9rem; display: flex;
+      justify-content: center; align-items: center; gap: 15px;
+    }
+    #cookie-consent button {
+      background: #fff; color: #111; border: none;
+      padding: 8px 15px; cursor: pointer; border-radius: 4px;
+      font-weight: bold;
+    }
+    #cookie-consent button:hover { background: #ddd; }
+  </style>
+  <div id="cookie-consent">
+    <span>We use cookies to improve your experience and serve personalized ads. By continuing, you agree to our privacy policy.</span>
+    <button onclick="document.getElementById('cookie-consent').style.display='none'">Accept</button>
+  </div>
+</body>
+</html>

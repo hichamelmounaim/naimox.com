@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Naimox</title>
+  <meta name="description" content="Learn about Naimox, our mission to simplify software development, and the engineers behind the site.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header"><div class="container nav">
+    <a href="index.html" class="logo"><span class="logo-icon">&gt;_</span> Naimox</a>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
+      <li><a href="index.html">/home</a></li><li><a href="blog.html">/tutorials</a></li><li><a href="index.html#tools">/tools</a></li><li><a href="about.html" class="active">/about</a></li><li><a href="contact.html">/contact</a></li>
+    </ul>
+  </div></header>
+
+  <section class="page-hero"><div class="container hero-content">
+    <h1 style="font-family:'Fira Code', monospace;">/about</h1>
+    <p>System information and mission protocol.</p>
+  </div></section>
+
+  <section class="content-page"><div class="container"><div class="content-body">
+    <h2>Init System</h2>
+    <p>Naimox was founded by a small team of full-stack developers who were tired of bloated, overly complex programming tutorials that spent 15 minutes explaining what HTML stands for before getting to the actual solution.</p>
+    
+    <h2>Our Core Philosophy</h2>
+    <ul>
+      <li><strong>No Fluff:</strong> If a concept can be explained in three sentences, we won't stretch it into a 2,000-word essay just for SEO.</li>
+      <li><strong>Practical Tools:</strong> Developers need quick utilities. Our in-browser tools (like the secure password generator) process everything client-side for maximum security and speed.</li>
+      <li><strong>Clean Code:</strong> We advocate for semantic HTML, vanilla JavaScript where possible, and understanding the fundamentals before jumping into the latest framework.</li>
+    </ul>
+
+    <h2>The Stack</h2>
+    <p>We practice what we preach. This website is built using static, highly optimized HTML, CSS, and JS. It loads instantly, respects your battery life by using dark mode, and does not track you with heavy third-party analytics scripts.</p>
+  </div></div></section>
+
+  <footer class="footer"><div class="container">
+    <div class="footer-grid">
+      <div><div class="logo"><span class="logo-icon">&gt;_</span> Naimox</div><p>Building better software through clear documentation and tools.</p></div>
+      <div><h4>System</h4><ul><li><a href="blog.html">/tutorials</a></li><li><a href="index.html#tools">/tools</a></li><li><a href="about.html">/about</a></li></ul></div>
+      <div><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Naimox.com. Initialized perfectly.</div>
+  </div></footer>
+  <script src="js/app.js"></script>
+
+  <style>
+    #cookie-consent {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #111; color: #fff; padding: 15px;
+      text-align: center; z-index: 9999;
+      font-size: 0.9rem; display: flex;
+      justify-content: center; align-items: center; gap: 15px;
+    }
+    #cookie-consent button {
+      background: #fff; color: #111; border: none;
+      padding: 8px 15px; cursor: pointer; border-radius: 4px;
+      font-weight: bold;
+    }
+    #cookie-consent button:hover { background: #ddd; }
+  </style>
+  <div id="cookie-consent">
+    <span>We use cookies to improve your experience and serve personalized ads. By continuing, you agree to our privacy policy.</span>
+    <button onclick="document.getElementById('cookie-consent').style.display='none'">Accept</button>
+  </div>
+</body>
+</html>

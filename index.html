@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naimox | Software Tutorials & Developer Tools</title>
+  <meta name="description" content="Naimox provides clean, no-nonsense software tutorials, coding advice, and free developer tools like secure password generation.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container nav">
+      <a href="index.html" class="logo"><span class="logo-icon">&gt;_</span> Naimox</a>
+      <button class="hamburger"><span></span><span></span><span></span></button>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">/home</a></li>
+        <li><a href="blog.html">/tutorials</a></li>
+        <li><a href="#tools">/tools</a></li>
+        <li><a href="about.html">/about</a></li>
+        <li><a href="contact.html">/contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-badge">v2.0.0 Online</div>
+      <h1>Code smarter, <br><span style="color:var(--primary);">not harder.</span></h1>
+      <p>Clean, no-nonsense software tutorials, debugging guides, and free browser-based developer utilities.</p>
+      <div style="display:flex; gap:15px; justify-content:center; flex-wrap:wrap;">
+        <a href="blog.html" class="btn btn-primary">Read Documentation</a>
+        <a href="#tools" class="btn btn-secondary">Open Utilities</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS SECTION -->
+  <section id="tools" class="tools-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 style="font-family:'Fira Code', monospace; color:var(--text-primary);">[ Developer Utilities ]</h2>
+        <p style="color:var(--text-secondary);">Client-side only. No data is sent to our servers.</p>
+      </div>
+      
+      <div class="tools-grid">
+        
+        <!-- Secure Password Generator -->
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon">🔐</span>
+            <h3>SecureKey_Gen</h3>
+          </div>
+          <div class="form-group">
+            <label>Length (8-64)</label>
+            <input type="number" id="passLength" value="16" min="8" max="64">
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="incUpper" checked> <label style="margin:0; font-size:0.85rem;">Uppercase (A-Z)</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="incLower" checked> <label style="margin:0; font-size:0.85rem;">Lowercase (a-z)</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="incNum" checked> <label style="margin:0; font-size:0.85rem;">Numbers (0-9)</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="incSym" checked> <label style="margin:0; font-size:0.85rem;">Symbols (!@#$)</label>
+          </div>
+          <button id="genPassBtn" class="btn btn-primary tool-btn">Generate Password</button>
+          
+          <div class="result-box">
+            <span id="passResult" style="color:var(--secondary);">Click generate...</span>
+            <button id="copyPassBtn" class="copy-btn">Copy</button>
+          </div>
+        </div>
+
+        <!-- String Manipulator -->
+        <div class="tool-card">
+          <div class="tool-header">
+            <span class="tool-icon">📝</span>
+            <h3>String_Format</h3>
+          </div>
+          <div class="form-group">
+            <label>Input String</label>
+            <textarea id="textInput" rows="4" placeholder="Paste text here..."></textarea>
+          </div>
+          
+          <div style="display:flex; justify-content:space-between; margin-bottom:15px; font-family:'Fira Code', monospace; font-size:0.85rem; color:var(--text-secondary);">
+            <span>Chars: <span id="charCount" style="color:var(--primary);">0</span></span>
+            <span>Words: <span id="wordCount" style="color:var(--primary);">0</span></span>
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <button id="upperBtn" class="btn btn-secondary" style="flex:1; font-size:0.85rem;">UPPER</button>
+            <button id="lowerBtn" class="btn btn-secondary" style="flex:1; font-size:0.85rem;">lower</button>
+            <button id="clearBtn" class="btn btn-secondary" style="flex:1; font-size:0.85rem; border-color:var(--primary); color:var(--primary);">Clear</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST ARTICLES -->
+  <section class="articles-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 style="font-family:'Fira Code', monospace; color:var(--text-primary);">[ Latest_Docs ]</h2>
+      </div>
+      
+      <div class="articles-grid">
+        <a href="articles/git-commit-best-practices.html" class="article-row">
+          <div class="article-icon">🐙</div>
+          <div class="article-content">
+            <h3>How to Write Better Git Commit Messages</h3>
+            <p>Stop using 'fixed bug'. A guide to semantic commit formatting.</p>
+            <div class="article-meta"><span>#git</span><span>#version-control</span><span>⏱ 4 min</span></div>
+          </div>
+        </a>
+
+        <a href="articles/understanding-cors.html" class="article-row">
+          <div class="article-icon">🛡️</div>
+          <div class="article-content">
+            <h3>Understanding CORS (Finally)</h3>
+            <p>Why your browser is blocking your API requests, and how to fix it securely.</p>
+            <div class="article-meta"><span>#web-security</span><span>#apis</span><span>⏱ 7 min</span></div>
+          </div>
+        </a>
+
+        <a href="articles/css-grid-vs-flexbox.html" class="article-row">
+          <div class="article-icon">📐</div>
+          <div class="article-content">
+            <h3>CSS Grid vs. Flexbox</h3>
+            <p>A definitive guide on when to use which layout system.</p>
+            <div class="article-meta"><span>#css</span><span>#frontend</span><span>⏱ 6 min</span></div>
+          </div>
+        </a>
+
+        <a href="articles/javascript-promises-explained.html" class="article-row">
+          <div class="article-icon">⚡</div>
+          <div class="article-content">
+            <h3>Demystifying JavaScript Promises</h3>
+            <p>Async/await and Promises explained simply, without the jargon.</p>
+            <div class="article-meta"><span>#javascript</span><span>#async</span><span>⏱ 5 min</span></div>
+          </div>
+        </a>
+
+        <a href="articles/stop-using-console-log.html" class="article-row">
+          <div class="article-icon">🐛</div>
+          <div class="article-content">
+            <h3>Stop Using console.log() for Everything</h3>
+            <p>Level up your debugging with console.table, debugger, and breakpoints.</p>
+            <div class="article-meta"><span>#debugging</span><span>#javascript</span><span>⏱ 4 min</span></div>
+          </div>
+        </a>
+
+        <a href="articles/vs-code-shortcuts.html" class="article-row">
+          <div class="article-icon">⌨️</div>
+          <div class="article-content">
+            <h3>10 VS Code Shortcuts You Should Be Using</h3>
+            <p>Ditch the mouse. Navigate your codebase twice as fast.</p>
+            <div class="article-meta"><span>#productivity</span><span>#vscode</span><span>⏱ 3 min</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo"><span class="logo-icon">&gt;_</span> Naimox</div>
+          <p>Building better software through clear documentation and tools.</p>
+        </div>
+        <div>
+          <h4>System</h4>
+          <ul><li><a href="blog.html">/tutorials</a></li><li><a href="#tools">/tools</a></li><li><a href="about.html">/about</a></li></ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms of Service</a></li><li><a href="disclaimer.html">Disclaimer</a></li><li><a href="sitemap-html.html">HTML Sitemap</a></li><li><a href="contact.html">Contact</a></li></ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 Naimox.com. Initialized perfectly.
+      </div>
+    </div>
+  </footer>
+  <script src="js/app.js"></script>
+
+  <style>
+    #cookie-consent {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #111; color: #fff; padding: 15px;
+      text-align: center; z-index: 9999;
+      font-size: 0.9rem; display: flex;
+      justify-content: center; align-items: center; gap: 15px;
+    }
+    #cookie-consent button {
+      background: #fff; color: #111; border: none;
+      padding: 8px 15px; cursor: pointer; border-radius: 4px;
+      font-weight: bold;
+    }
+    #cookie-consent button:hover { background: #ddd; }
+  </style>
+  <div id="cookie-consent">
+    <span>We use cookies to improve your experience and serve personalized ads. By continuing, you agree to our privacy policy.</span>
+    <button onclick="document.getElementById('cookie-consent').style.display='none'">Accept</button>
+  </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Git Commit Best Practices: Stop Writing Bad Messages | Naimox</title>
+  <meta name="description" content="Learn how to write clean, useful Git commit messages. Discover the Conventional Commits format, atomic commits, and why your commit history matters for team collaboration.">
+  <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Git Commit Best Practices: Stop Writing Bad Messages | Naimox",
+  "description": "width=device-width, initial-scale=1.0",
+  "datePublished": "2026-05-04",
+  "author": {
+    "@type": "Organization",
+    "name": "naimox Editorial"
+  }
+}
+</script>
+</head>
+<body>
+  <header class="header"><div class="container nav"><a href="../index.html" class="logo"><span class="terminal-icon">>&_</span> Naimox</a><ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="../blog.html" class="active">Tutorials</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul><button class="hamburger"><span></span><span></span><span></span></button></div></header>
+
+  <section class="page-hero"><div class="container hero-content"><span class="tag">Git & CI/CD</span><h1>Git Commit Best Practices: Stop Writing Bad Messages</h1><div class="article-meta"><span>📅 May 4, 2026</span><span>⏱ 10 min read</span><span>🛠️ Version Control</span>
+    
+    <div style="margin-top: 20px; padding-bottom: 20px;">
+      <strong>Share this article: </strong>
+      <a href="#" style="margin-left: 10px; color: #1DA1F2; text-decoration: none;">🐦 Twitter</a>
+      <a href="#" style="margin-left: 10px; color: #4267B2; text-decoration: none;">📘 Facebook</a>
+      <a href="#" style="margin-left: 10px; color: #0077b5; text-decoration: none;">💼 LinkedIn</a>
+    </div>
+  
+    <div style="margin-top: 30px; padding: 20px; background-color: var(--bg-secondary, #f9f9f9); border-radius: 8px; display: flex; align-items: center; gap: 15px;">
+      <div style="width: 60px; height: 60px; border-radius: 50%; background-color: var(--accent, #007bff); color: white; display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: bold;">
+        N
+      </div>
+      <div>
+        <h4 style="margin: 0 0 5px 0;">About the Author: Naimox Editorial Team</h4>
+        <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary, #555);">
+          We are a dedicated team of experts and enthusiasts committed to providing accurate, highly researched, and engaging content. Our goal is to empower our readers with reliable information and actionable advice.
+        </p>
+      </div>
+    </div>
+  
+    <div style="margin-top:40px; padding-top:20px; border-top:1px solid #eee;">
+      <h3>Related Articles</h3>
+      <ul style="list-style-type:none; padding:0; display:flex; flex-direction:column; gap:10px;">
+        <li><a href="css-grid-vs-flexbox.html" style="color:var(--accent, #007bff); text-decoration:none;">Read More: CSS GRID VS FLEXBOX</a></li>
+        <li><a href="javascript-promises-explained.html" style="color:var(--accent, #007bff); text-decoration:none;">Read More: JAVASCRIPT PROMISES EXPLAINED</a></li>
+      </ul>
+    </div>
+</div></div></section>
+
+  <section class="content-page"><div class="container"><div class="content-body">
+    <p>Look at the Git history of a personal project you wrote a year ago. Chances are, you will see a litany of messages reading: <code>"fixed bug"</code>, <code>"wip"</code>, <code>"update"</code>, <code>"finally working"</code>, and perhaps a frustrated <code>"asdfasdf"</code>. When you are the only one working on a codebase, these lazy commit messages seem harmless. However, the moment you join a professional development team, your Git history ceases to be a personal scratchpad and becomes the single most important documentation tool for the entire project.</p>
+    <p>A well-maintained Git history allows a team to track down when a specific bug was introduced using <code>git bisect</code>, automatically generate release notes, and understand the context behind confusing code decisions long after the original author has left the company. Poor commit messages render these workflows impossible. In this guide, we will explore the professional standards for creating a clean, useful, and professional Git history.</p>
+
+    <h2>The Concept of Atomic Commits</h2>
+    <p>Before you even write a message, you need to understand what you are committing. The foundational rule of version control is the "Atomic Commit." An atomic commit is a single, complete, and indivisible unit of work. It should do exactly one thing, and it should do it completely.</p>
+    <p>If you spend an afternoon building a new login form, fixing a CSS bug in the footer, and refactoring a database utility function, you should not lump all those changes into a single commit with the message <code>"updated UI and fixed db"</code>. You should make three separate commits. Why? Because if the database refactor breaks production, the team needs to be able to use <code>git revert</code> to undo the database changes without accidentally removing the new login form as well. Keep your commits small, focused, and independently reversible.</p>
+
+    <h2>The Anatomy of a Professional Commit Message</h2>
+    <p>A standard professional commit message consists of three parts: a subject line, an optional body, and an optional footer. They should be separated by blank lines.</p>
+
+    <h3>1. The Subject Line (The Summary)</h3>
+    <p>The subject line is the most important part. It is what appears when running <code>git log --oneline</code> and what reviewers see first on GitHub or GitLab. Follow these strict rules:</p>
+    <ul>
+      <li><strong>Capitalize the first letter.</strong> Treat it like the beginning of a sentence.</li>
+      <li><strong>Do not end with a period.</strong> Space is valuable; punctuation is unnecessary.</li>
+      <li><strong>Limit the length to 50 characters.</strong> If you cannot summarize the change in 50 characters, your commit is probably not atomic and needs to be split up.</li>
+      <li><strong>Use the imperative mood.</strong> This is the most crucial rule. Write the message as if giving a command. Use "Add login validation" instead of "Added login validation" or "Adding login validation". A good test is to complete this sentence: "If applied, this commit will <i>[your subject line]</i>."</li>
+    </ul>
+
+    <h3>2. The Body (The Context)</h3>
+    <p>While the subject line explains <i>what</i> changed, the body explains <i>why</i> it changed. The code itself shows how you did it, but only the commit message can explain the business logic or rationale behind the decision. Wrap the body text at 72 characters to ensure it renders correctly in all terminal environments. Use the body to explain what the previous behavior was, what the new behavior is, and why you made the switch.</p>
+
+    <h3>3. The Footer (The Metadata)</h3>
+    <p>The footer is reserved for tracking metadata. This is where you link the commit to your issue tracking system (Jira, Linear, GitHub Issues) using keywords like <code>Closes #123</code> or <code>Resolves TICKET-402</code>. Many project management tools will automatically close the referenced ticket when the commit is merged into the main branch.</p>
+
+    <h2>The "Conventional Commits" Standard</h2>
+    <p>Many modern development teams have adopted the "Conventional Commits" specification. This is a lightweight convention on top of commit messages that provides an easy set of rules for creating an explicit commit history. It requires prefixing your subject line with a specific type, making it incredibly easy to parse the history programmatically to trigger automated semantic versioning and changelog generation.</p>
+    <p>The standard prefixes include:</p>
+    <ul>
+      <li><strong>feat:</strong> A new feature for the user.</li>
+      <li><strong>fix:</strong> A bug fix for the user.</li>
+      <li><strong>docs:</strong> Changes to the documentation only.</li>
+      <li><strong>style:</strong> Formatting, missing semi-colons, etc. (no code change).</li>
+      <li><strong>refactor:</strong> Refactoring production code (neither fixes a bug nor adds a feature).</li>
+      <li><strong>test:</strong> Adding missing tests or correcting existing tests.</li>
+      <li><strong>chore:</strong> Updating build tasks, package manager configs, etc.</li>
+    </ul>
+    <p>An example of a Conventional Commit looks like this:</p>
+    <pre><code>feat: add password strength meter to registration
+
+When a user registers, they previously had no visual feedback
+on the security of their password. This implements a visual
+meter relying on the zxcvbn library to calculate entropy.
+
+Resolves #842</code></pre>
+
+    <h2>Why Bother? The Long-Term Value</h2>
+    <p>Writing good commit messages requires slowing down for an extra 60 seconds before typing <code>git push</code>. When you are rushing to finish a feature on a Friday afternoon, it feels like an annoying administrative burden. But software development is a team sport, and code is read far more often than it is written. A pristine Git history acts as a time machine, allowing developers to safely navigate and understand complex codebases years after the code was initially authored. Treat your commit history with the same respect you treat your production code.</p>
+
+    <p><a href="../blog.html" style="color:var(--accent);text-decoration:none;font-weight:600">← Back to All Tutorials</a></p>
+  </div></div></section>
+
+  <footer class="footer"><div class="container"><div class="footer-grid"><div><div class="logo"><span class="terminal-icon">>&_</span> Naimox</div><p>Developer tools, tutorials, and insights for modern software engineering.</p></div><div><h4>Explore</h4><ul><li><a href="../blog.html">Tutorials</a></li><li><a href="../index.html#tools">Developer Tools</a></li><li><a href="../about.html">About</a></li></ul></div><div><h4>Legal</h4><ul><li><a href="../privacy.html">Privacy Policy</a></li><li><a href="../terms.html">Terms of Service</a></li><li><a href="../disclaimer.html">Disclaimer</a></li><li><a href="../sitemap-html.html">HTML Sitemap</a></li><li><a href="../contact.html">Contact</a></li></ul></div></div><div class="footer-bottom">&copy; 2026 Naimox.com. All rights reserved.</div></div></footer>
+  <script src="../js/app.js"></script>
+
+  <style>
+    #cookie-consent {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: #111; color: #fff; padding: 15px;
+      text-align: center; z-index: 9999;
+      font-size: 0.9rem; display: flex;
+      justify-content: center; align-items: center; gap: 15px;
+    }
+    #cookie-consent button {
+      background: #fff; color: #111; border: none;
+      padding: 8px 15px; cursor: pointer; border-radius: 4px;
+      font-weight: bold;
+    }
+    #cookie-consent button:hover { background: #ddd; }
+  </style>
+  <div id="cookie-consent">
+    <span>We use cookies to improve your experience and serve personalized ads. By continuing, you agree to our privacy policy.</span>
+    <button onclick="document.getElementById('cookie-consent').style.display='none'">Accept</button>
+  </div>
+</body>
+</html>
